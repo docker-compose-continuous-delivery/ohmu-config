@@ -1,0 +1,33 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    volumes:
+      - vaultwarden-appdata:/data/
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.entrypoints=websecure"
+      - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.ozeliurs.com`) || Host(`vaultwarden2.ozeliurs.com`)"
+      - "traefik.http.routers.vaultwarden.tls=true"
+      - "traefik.http.routers.vaultwarden.tls.certresolver=cloudflare"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+
+      - "com.centurylinklabs.watchtower.enable=true"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:80" ]
+
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  vaultwarden-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/vaultwarden'
+      o: bind
