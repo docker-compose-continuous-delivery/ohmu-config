@@ -10,9 +10,9 @@ services:
       - 'minio-data:/data'
       - 'minio-appdata:/root/.minio'
     environment:
-      - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minio}
-      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minio123}
-      - MINIO_VOLUMES="/data"
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio123}
+      MINIO_VOLUMES: "/data"
     networks:
       - traefik
     labels:
