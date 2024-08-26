@@ -1,0 +1,8 @@
+{
+    "acls": [
+        {"action": "accept", "src": ["*"], "dst": ["*:*"]}
+    ],
+    "autoApprovers": {
+        "exitNode": ["*"]
+    },
+}

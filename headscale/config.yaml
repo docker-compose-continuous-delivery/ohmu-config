@@ -1,0 +1,118 @@
+---
+# The url clients will connect to.
+server_url: https://headscale.ozeliurs.com
+
+# Address to listen to / bind to on the server
+listen_addr: 0.0.0.0:8080
+
+# Address to listen to /metrics, you may want
+metrics_listen_addr: 0.0.0.0:9090
+
+# Address to listen for gRPC.
+grpc_listen_addr: 127.0.0.1:50443
+
+# Allow the gRPC admin interface to run in INSECURE mode.
+grpc_allow_insecure: false
+
+# Private key used to encrypt the traffic between headscale
+# and Tailscale clients.
+private_key_path: ./private.key
+
+noise:
+  # The Noise private key is used to encrypt thex
+  # traffic between headscale and Tailscale clients.
+  private_key_path: /var/lib/headscale/noise_private.key
+
+# List of IP prefixes to allocate tailaddresses from.
+# IPv6: https://github.com/tailscale/tailscale/blob/22ebb25e833264f58d7c3f534a8b166894a89536/net/tsaddr/tsaddr.go#LL81C52-L81C71
+# IPv4: https://github.com/tailscale/tailscale/blob/22ebb25e833264f58d7c3f534a8b166894a89536/net/tsaddr/tsaddr.go#L33
+ip_prefixes:
+  - fd7a:115c:a1e0::/48
+  - 100.64.0.0/10
+
+# Disables the automatic check for headscale updates on startup
+disable_check_updates: false
+
+# Time before an inactive ephemeral node is deleted?
+ephemeral_node_inactivity_timeout: 30m
+
+# Period to check for node updates within the tailnet. (10-60s)
+node_update_check_interval: 10s
+
+# SQLite config
+db_type: sqlite3
+db_path: /var/lib/headscale/db.sqlite
+
+log:
+  # Output formatting for logs: text or json
+  format: text
+  level: info
+
+
+dns_config:
+  # Whether to prefer using Headscale provided DNS or use local.
+  override_local_dns: true
+
+  # List of DNS servers to expose to clients.
+  nameservers:
+    - 1.1.1.1
+    - 8.8.8.8
+
+  # Whether to use [MagicDNS](https://tailscale.com/kb/1081/magicdns/).
+  magic_dns: true
+
+  # Defines the base domain to create the hostnames for MagicDNS. (apoo.hs.ozeliurs.com)
+  base_domain: hs.ozeliurs.com
+
+# Unix socket used for the CLI to connect without authentication
+unix_socket: /var/run/headscale.sock
+unix_socket_permission: "0770"
+
+# Enabling this option makes devices prefer a random port for WireGuard traffic over the
+# default static port 41641. This option is intended as a workaround for some buggy
+# firewall devices. See https://tailscale.com/kb/1181/firewalls/ for more information.
+randomize_client_port: false
+
+## DERP =========================
+
+derp:
+  server:
+    # Whether to enable the embedded DERP server.
+    enabled: false
+
+    # The region ID to use for the embedded DERP server.
+    region_id: 969
+
+    # Region code and name are displayed in the Tailscale UI to identify a DERP region
+    region_code: "ozeliurs"
+    region_name: "Ozeliurs' DERP Server"
+
+    # Listens over UDP at the configured address for STUN connections - to help with NAT traversal.
+    stun_listen_addr: "0.0.0.0:3478"
+
+  # List of externally available DERP maps encoded in JSON
+  urls:
+    - https://controlplane.tailscale.com/derpmap/default
+
+  paths: []
+
+  # Whether to automatically update the DERP map and how often.
+  auto_update_enabled: true
+  update_frequency: 24h
+
+oidc:
+  # Block further startup until the OIDC provider is healthy and available
+  only_start_if_oidc_is_available: true
+
+  # Specified by your OIDC provider
+  issuer: "https://keycloak.auth.apoorva64.com/realms/lab"
+  client_id: "headscale-main"
+
+  # Customize the scopes used in the OIDC flow, defaults to "openid", "profile" and "email" and add custom query
+  # parameters to the Authorize Endpoint request. Scopes default to "openid", "profile" and "email".
+  scope: ["openid", "profile", "email"]
+
+  allowed_groups:
+    - /headscale
+
+  strip_email_domain: false
