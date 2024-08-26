@@ -1,0 +1,47 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    restart: unless-stopped
+    ports:
+      - "9001:9001"
+    volumes:
+      - 'minio-data:/data'
+      - 'minio-appdata:/root/.minio'
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minio}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minio}
+      - MINIO_VOLUMES="/data"
+    networks:
+      - traefik
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.minio.rule=Host(`minio.ozeliurs.com`)'
+      - 'traefik.http.routers.minio.entrypoints=websecure'
+      - 'traefik.http.routers.minio.tls=true'
+      - 'traefik.http.routers.minio.tls.certresolver=letsencrypt'
+      - 'traefik.http.services.minio.loadbalancer.server.port=9000'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+    minio-data:
+        driver: local
+        driver_opts:
+        type: none
+        device: '/mnt/data/minio'
+        o: bind
+    minio-appdata:
+        driver: local
+        driver_opts:
+        type: none
+        device: '/mnt/appdata/minio'
+        o: bind
