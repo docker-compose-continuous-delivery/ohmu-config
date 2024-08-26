@@ -13,3 +13,7 @@ services:
       - "traefik.http.routers.beta-ozeliurs.tls.certresolver=letsencrypt"
     healthcheck:
       test: [ "CMD", "wget", "-q", "--spider", "http://localhost:5000" ]
+
+networks:
+  traefik:
+    external: true
