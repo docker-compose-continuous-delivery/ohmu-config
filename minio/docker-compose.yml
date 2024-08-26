@@ -33,15 +33,15 @@ networks:
     external: true
 
 volumes:
-    minio-data:
-        driver: local
-        driver_opts:
-        type: none
-        device: '/mnt/data/minio'
-        o: bind
-    minio-appdata:
-        driver: local
-        driver_opts:
-        type: none
-        device: '/mnt/appdata/minio'
-        o: bind
+  minio-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/data/minio'
+      o: bind
+  minio-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/minio'
+      o: bind
