@@ -20,9 +20,8 @@ services:
       - "traefik.http.routers.paperless.rule=Host(`paper.ozeliurs.com`)"
       - "traefik.http.routers.paperless.entrypoints=websecure"
       - "traefik.http.routers.paperless.tls=true"
-      - "traefik.http.routers.paperless.tls.certresolver=cloudflare"
+      - "traefik.http.routers.paperless.tls.certresolver=letsencrypt"
       - "traefik.http.services.paperless.loadbalancer.server.port=8000"
-      - "traefik.http.routers.paperless.middlewares=authelia@docker"
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000" ]
 
