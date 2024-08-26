@@ -48,7 +48,6 @@ services:
   redis:
     image: redis
     container_name: infisical-dev-redis
-    env_file: .env
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
@@ -73,7 +72,7 @@ services:
     networks:
       - traefik
     healthcheck:
-      test: "pg_isready --username=${POSTGRES_USER} && psql --username=${POSTGRES_USER} --list"
+      test: "pg_isready --username=infisical && psql --username=infisical --list"
       interval: 5s
       timeout: 10s
       retries: 10
