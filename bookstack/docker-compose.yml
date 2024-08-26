@@ -49,12 +49,12 @@ volumes:
   bookstack-appdata:
     driver: local
     driver_opts:
-    type: none
-    device: '/mnt/appdata/bookstack/app'
-    o: bind
+      type: none
+      device: '/mnt/appdata/bookstack/app'
+      o: bind
   bookstack-dbdata:
     driver: local
     driver_opts:
-    type: none
-    device: '/mnt/appdata/bookstack/db'
-    o: bind
+      type: none
+      device: '/mnt/appdata/bookstack/db'
+      o: bind
