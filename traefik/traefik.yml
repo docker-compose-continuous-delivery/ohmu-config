@@ -1,0 +1,63 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+log:
+  level: WARNING  # Logging level: DEBUG, INFO, WARNING, ERROR (Default), CRITICAL
+
+# Optional: Accesslog configuration
+accesslog:
+  format: common  # Log format: common, json, logfmt
+  filePath: /var/log/traefik/access.log
+
+# Optional: API and Dashboard configuration
+api:
+  dashboard: false  # Set to true to enable the dashboard
+  insecure: false  # Set to true to allow insecure access to the API
+
+# Optional: Enable ping
+ping: {}
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    addEntryPointsLabels: true
+    addServicesLabels: true
+
+# Entry Points configuration
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: :443
+
+  metrics:
+    address: :8082
+
+# Configure your CertificateResolver
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: admin@ozeliurs.com
+      storage: /letsencrypt/acme.json
+      caServer: "https://acme-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+        entryPoint: web
+
+providers:
+  docker:
+    exposedByDefault: false
+  file:
+    directory: /etc/traefik
+    watch: true  # Watch for dynamic configuration changes
