@@ -1,7 +1,7 @@
 # Make sure the "flomepage" appdata folders exists
 sudo mkdir -p /mnt/appdata/flame
 
-PROJECT_ID=""
+PROJECT_ID="60e350e8-e249-4794-b034-100acdda7452"
 
 # Export secrets and compare directly with the existing .env file
 if ! infisical export --format=dotenv --projectId $PROJECT_ID --domain https://infisical.ozeliurs.com -e prod | cmp -s - .env; then
