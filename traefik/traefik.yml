@@ -3,7 +3,7 @@ global:
   sendAnonymousUsage: false
 
 log:
-  level: WARNING  # Logging level: DEBUG, INFO, WARNING, ERROR (Default), CRITICAL
+  level: INFO  # Logging level: DEBUG, INFO, WARNING, ERROR (Default), CRITICAL
 
 # Optional: Accesslog configuration
 accesslog:
