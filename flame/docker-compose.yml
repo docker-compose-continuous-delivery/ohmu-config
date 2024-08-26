@@ -1,0 +1,31 @@
+services:
+  flame:
+    image: pawelmalak/flame
+    container_name: flame
+    restart: unless-stopped
+    volumes:
+      - flame-appdata:/app/data
+    environment:
+      PASSWORD: ${PASSWORD}
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flame.rule=Host(`flame.ozeliurs.com`)"
+      - "traefik.http.routers.flame.entrypoints=websecure"
+      - "traefik.http.routers.flame.tls=true"
+      - "traefik.http.routers.flame.tls.certresolver=letsencrypt"
+      - "traefik.http.services.flame.loadbalancer.server.port=5005"
+
+networks:
+  traefik:
+    external: true
+
+
+volumes:
+  flame-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/flame'
+      o: bind
