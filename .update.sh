@@ -20,14 +20,16 @@ fi
 echo "Pulling latest changes"
 git pull -X theirs
 
+source .env
+
 # Run the on-update.sh script
 echo "Running on-update.sh for each folder ..."
 for f in */; do
     if [ -f "$f.on-update.sh" ]; then
         echo "Running on-update.sh in $f"
         cd $f
-        bash .on-update.sh
+        chmod +x .on-update.sh
+        ./.on-update.sh
         cd ..
     fi
-    # TODO: detect changes and restart only necessary services
 done
