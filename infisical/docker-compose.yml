@@ -31,8 +31,8 @@ services:
       DB_CONNECTION_URI: "postgresql://infisical:infisical@db:5432/infisical"
       REDIS_URL: "redis://redis:6379"
 
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-6c1fe4e407b8911c104518103505b218}
-      AUTH_SECRET: ${AUTH_SECRET:-5lrMXKKWCVocS/uerPsl7V+TX/aaUaI7iDkgl3tSmLE=}
+      ENCRYPTION_KEY: $ENCRYPTION_KEY
+      AUTH_SECRET: $AUTH_SECRET
 
       NODE_ENV: "production"
     networks:
