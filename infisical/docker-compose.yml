@@ -1,0 +1,91 @@
+version: "3"
+
+services:
+  db-migration:
+    container_name: infisical-db-migration
+    depends_on:
+      db:
+        condition: service_healthy
+    image: infisical/infisical:latest-postgres
+    environment:
+      DB_CONNECTION_URI: "postgresql://infisical:infisical@db:5432/infisical"
+    command: npm run migration:latest
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=false"
+
+  backend:
+    container_name: infisical-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      db-migration:
+        condition: service_completed_successfully
+    image: infisical/infisical:latest-postgres
+    environment:
+      SITE_URL: "https://infisical.ozeliurs.com"
+      DB_CONNECTION_URI: "postgresql://infisical:infisical@db:5432/infisical"
+      REDIS_URL: "redis://redis:6379"
+
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-6c1fe4e407b8911c104518103505b218}
+      AUTH_SECRET: ${AUTH_SECRET:-5lrMXKKWCVocS/uerPsl7V+TX/aaUaI7iDkgl3tSmLE=}
+
+      NODE_ENV: "production"
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.infisical-backend.rule=Host(`infisical.ozeliurs.com`)"
+      - "traefik.http.routers.infisical-backend.entrypoints=websecure"
+      - "traefik.http.routers.infisical-backend.tls=true"
+      - "traefik.http.routers.infisical-backend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.infisical-backend.loadbalancer.server.port=8080"
+
+  redis:
+    image: redis
+    container_name: infisical-dev-redis
+    env_file: .env
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    networks:
+      - traefik
+    volumes:
+      - redis_data:/data
+    labels:
+      - "traefik.enable=false"
+
+  db:
+    container_name: infisical-db
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "infisical"
+      POSTGRES_USER: "infisical"
+      POSTGRES_DB: "infisical"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - traefik
+    healthcheck:
+      test: "pg_isready --username=${POSTGRES_USER} && psql --username=${POSTGRES_USER} --list"
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    labels:
+      - "traefik.enable=false"
+
+volumes:
+  pg_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  traefik:
+    external: true
