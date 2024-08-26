@@ -6,19 +6,35 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Change to the parent of the parent directory of this script
 cd $SCRIPT_DIR
 
-# Fetch the latest changes from the remote
-echo "Fetching latest changes"
-git fetch
+# Parse command-line arguments
+FORCE_UPDATE=false
+while getopts "f" opt; do
+  case ${opt} in
+    f )
+      FORCE_UPDATE=true
+      ;;
+    \? )
+      echo "Usage: cmd [-f]"
+      exit 1
+      ;;
+  esac
+done
 
-# Check if there are any changes
-if [[ $(git rev-parse HEAD) == $(git rev-parse @{u}) ]]; then
-    echo "No changes to pull"
-    exit 0
+# Fetch the latest changes from the remote if not forcing update
+if [ "$FORCE_UPDATE" = false ]; then
+  echo "Fetching latest changes"
+  git fetch
+
+  # Check if there are any changes
+  if [[ $(git rev-parse HEAD) == $(git rev-parse @{u}) ]]; then
+      echo "No changes to pull"
+      exit 0
+  fi
+
+  # Pull the latest changes, overwriting any local changes
+  echo "Pulling latest changes"
+  git pull -X theirs
 fi
-
-# Pull the latest changes, overwriting any local changes
-echo "Pulling latest changes"
-git pull -X theirs
 
 set -a # automatically export all variables
 source .env
