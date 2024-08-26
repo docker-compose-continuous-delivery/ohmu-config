@@ -20,7 +20,9 @@ fi
 echo "Pulling latest changes"
 git pull -X theirs
 
+set -a # automatically export all variables
 source .env
+set +a
 
 # Run the on-update.sh script
 echo "Running on-update.sh for each folder ..."
