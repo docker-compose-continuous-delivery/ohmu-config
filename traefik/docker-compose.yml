@@ -18,18 +18,6 @@ services:
       timeout: 2s
       retries: 3
 
-  hello-world:
-    image: "traefik/whoami"
-    container_name: "hello-world"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.hello-world.rule=Host(`hello-world.ozeliurs.com`)"
-      - "traefik.http.routers.hello-world.entrypoints=websecure"
-      - "traefik.http.routers.hello-world.tls=true"
-      - "traefik.http.routers.hello-world.tls.certresolver=letsencrypt"
-    networks:
-      - traefik
-
 networks:
   traefik:
     external: true
