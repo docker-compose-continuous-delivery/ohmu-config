@@ -3,6 +3,7 @@ services:
     image: minio/minio:latest
     container_name: minio
     restart: unless-stopped
+    command: server
     ports:
       - "9001:9001"
     volumes:
