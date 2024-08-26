@@ -10,7 +10,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.vaultwarden.entrypoints=websecure"
-      - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.ozeliurs.com`) || Host(`vaultwarden2.ozeliurs.com`)"
+      - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.ozeliurs.com`)"
       - "traefik.http.routers.vaultwarden.tls=true"
       - "traefik.http.routers.vaultwarden.tls.certresolver=letsencrypt"
       - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
