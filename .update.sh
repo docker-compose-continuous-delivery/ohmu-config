@@ -4,7 +4,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Change to the parent of the parent directory of this script
-cd $SCRIPT_DIR/..
+cd $SCRIPT_DIR
 
 # Fetch the latest changes from the remote
 echo "Fetching latest changes"
