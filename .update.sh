@@ -30,6 +30,7 @@ for f in */; do
         cd $f
         chmod +x .on-update.sh
         ./.on-update.sh
+        git restore .on-update.sh
         cd ..
     fi
 done

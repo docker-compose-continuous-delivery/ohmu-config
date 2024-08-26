@@ -1,5 +1,5 @@
 # Update Secrets
-PROJECT_ID="09b0a40c-0431-4596-a6cb-47e7c6cb767b"
+PROJECT_ID="bdac0f34-6a92-4023-84d6-7f89a81171c5"
 infisical export --format=dotenv --projectId $PROJECT_ID --domain https://infisical.ozeliurs.com -e prod > .env
 
 # Restart all containers
