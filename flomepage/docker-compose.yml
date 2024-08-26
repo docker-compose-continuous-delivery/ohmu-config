@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     container_name: flomepage
     environment:
-      - IP2LOCATION_TOKEN: ${IP2LOCATION_TOKEN}
+      IP2LOCATION_TOKEN: ${IP2LOCATION_TOKEN}
     volumes:
       - flomepage-appdata:/app/persistent
       - flomepage-ip2location:/app/IP2LOCATION
