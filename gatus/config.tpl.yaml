@@ -245,7 +245,7 @@ endpoints:
     interval: 1m
     conditions:
       - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
+      # - "[CERTIFICATE_EXPIRATION] > 48h"    # The certificate is not valid. The chain is broken.
     alerts:
       - type: discord
         description: "Polytech is dying, as always! The website polytech.unice.fr is down!"
