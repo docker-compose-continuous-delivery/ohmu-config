@@ -65,8 +65,8 @@ while IFS= read -r line; do
   key=$(echo "$line" | cut -d '=' -f 1)
   value=$(echo "$line" | cut -d '=' -f 2-)
 
-  # Remove quotes from the value if they exist
-  value=$(echo "$value" | sed 's/^"//' | sed 's/"$//')
+  # Remove both single and double quotes from the value if they exist
+  value=$(echo "$value" | sed "s/^'//; s/'\$//; s/^\"//; s/\"$//")
 
   # Print verbose message if enabled
   if $VERBOSE; then
