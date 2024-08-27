@@ -243,9 +243,11 @@ endpoints:
     group: polytech
     url: "https://polytech.univ-cotedazur.fr/"
     interval: 1m
+    client:
+      insecure: true
     conditions:
       - "[STATUS] == 200"
-      # - "[CERTIFICATE_EXPIRATION] > 48h"    # The certificate is not valid. The chain is broken.
+      - "[CERTIFICATE_EXPIRATION] > 48h"
     alerts:
       - type: discord
         description: "Polytech is dying, as always! The website polytech.unice.fr is down!"
