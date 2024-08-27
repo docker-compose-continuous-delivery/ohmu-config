@@ -1,0 +1,30 @@
+services:
+  gatus:
+    image: twinproduction/gatus
+    container_name: gatus
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/config/config.yaml
+      - gatus-appdata:/data
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gatus.rule=Host(`gatus.ozeliurs.com`)"
+      - "traefik.http.routers.gatus.entrypoints=websecure"
+      - "traefik.http.routers.gatus.tls=true"
+      - "traefik.http.routers.gatus.tls.certresolver=letsencrypt"
+      - "traefik.http.services.gatus.loadbalancer.server.port=8080"
+
+networks:
+  traefik:
+    external: true
+
+
+volumes:
+  gatus-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/gatus'
+      o: bind

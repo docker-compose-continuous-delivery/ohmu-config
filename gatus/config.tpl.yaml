@@ -1,0 +1,20 @@
+storage:
+  type: sqlite
+  path: /data/data.db
+
+alerting:
+  discord:
+    webhook-url: "{{ DISCORD_WEBHOOK_URL }}"
+
+endpoints:
+  - name: ozeliurs-com
+    group: ozeliurs
+    url: "https://ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the website ozeliurs.com is down!"
+        send-on-resolved: true
