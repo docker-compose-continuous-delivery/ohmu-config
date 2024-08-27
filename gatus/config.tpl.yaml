@@ -120,7 +120,7 @@ endpoints:
     url: "https://homepage.ax.oze.li/"
     interval: 1m
     conditions:
-      - "[STATUS] == 200"
+      - "[STATUS] == 401"
       - "[CERTIFICATE_EXPIRATION] > 48h"
     alerts:
       - type: discord
