@@ -1,6 +1,7 @@
 services:
   fusion:
     image: rook1e404/fusion:latest
+    container_name: fusion
     restart: "unless-stopped"
     environment:
       PASSWORD: ${PASSWORD}
@@ -15,11 +16,6 @@ services:
       - "traefik.http.routers.fusion.tls=true"
       - "traefik.http.routers.fusion.tls.certresolver=letsencrypt"
       - "traefik.http.services.fusion.loadbalancer.server.port=8080"
-    healthcheck:
-      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:8080" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
 networks:
   traefik:
