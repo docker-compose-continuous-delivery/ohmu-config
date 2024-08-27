@@ -16,7 +16,7 @@ fi
 ../.scripts/envsubst.sh .env config.tpl.yaml config.yaml
 
 # List of files to monitor for changes
-FILES_TO_MONITOR=("config.yaml")
+FILES_TO_MONITOR=("config.tpl.yaml")
 
 # Check if any of the specified files have changed
 CHANGED=false
