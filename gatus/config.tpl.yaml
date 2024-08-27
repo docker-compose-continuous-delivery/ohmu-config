@@ -7,6 +7,7 @@ alerting:
     webhook-url: "{{ DISCORD_WEBHOOK_URL }}"
 
 endpoints:
+  # ======================= Ozeliurs Services =======================
   - name: ozeliurs-com
     group: ozeliurs
     url: "https://www.ozeliurs.com/"
@@ -43,6 +44,30 @@ endpoints:
         description: "Hello <@325623032456413186>, the website bookstack.ozeliurs.com is down!"
         send-on-resolved: true
 
+  - name: blog
+    group: ozeliurs
+    url: "https://blog.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the website blog.ozeliurs.com is down!"
+        send-on-resolved: true
+
+  - name: flomepage
+    group: ozeliurs
+    url: "https://flomepage.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the website flomepage.ozeliurs.com is down!"
+        send-on-resolved: true
+
   - name: forgejo
     group: ozeliurs
     url: "https://git.ozeliurs.com/"
@@ -53,6 +78,18 @@ endpoints:
     alerts:
       - type: discord
         description: "Hello <@325623032456413186>, the website git.ozeliurs.com is down!"
+        send-on-resolved: true
+
+  - name: headscale
+    group: ozeliurs
+    url: "https://headscale.ozeliurs.com/windows"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the website headscale.ozeliurs.com is down!"
         send-on-resolved: true
 
   - name: infisical
@@ -103,6 +140,7 @@ endpoints:
         description: "Hello <@325623032456413186>, the website paper.ozeliurs.com is down!"
         send-on-resolved: true
 
+  # ======================= Axel Services =======================
   - name: grafana
     group: axel
     url: "https://grafana.ax.oze.li/"
@@ -149,4 +187,90 @@ endpoints:
     alerts:
       - type: discord
         description: "Hello <@373187960881020931>, your Traefik instance is down!"
+        send-on-resolved: true
+
+  # ======================= Edgar Services =======================
+  - name: horus
+    group: edgar
+    url: "https://horus.bizel.fr/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 403"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@294090174650908672>, your Horus instance is down!"
+        send-on-resolved: true
+
+  # ======================= Polytech Services ====================
+  - name: auth
+    group: polytech
+    url: "https://login.univ-cotedazur.fr/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Polytech is dying, as always! The auth service is down!"
+        send-on-resolved: true
+
+  - name: edt
+    group: polytech
+    url: "https://sco.polytech.unice.fr/1/invite?login=true"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Polytech is dying, as always! The edt service is down!"
+        send-on-resolved: true
+
+  - name: moodle
+    group: polytech
+    url: "https://lms.univ-cotedazur.fr/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Polytech is dying, as always! The moodle service is down!"
+        send-on-resolved: true
+
+  - name: polytech
+    group: polytech
+    url: "https://polytech.univ-cotedazur.fr/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Polytech is dying, as always! The website polytech.unice.fr is down!"
+        send-on-resolved: true
+
+  - name: vella-vm
+    group: polytech
+    url: "http://quoridorarena.ps8.academy/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: discord
+        description: "Vella didn't pay the bills, the VM is down!"
+        send-on-resolved: true
+
+  # ======================= Public Monitors =======================
+  - name: github
+    group: public
+    url: "https://github.com/"
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello, GitHub is down!"
         send-on-resolved: true
