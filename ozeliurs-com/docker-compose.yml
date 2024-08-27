@@ -7,10 +7,10 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.beta-ozeliurs.rule=Host(`ozeliurs.com`) || Host(`www.ozeliurs.com`)"
-      - "traefik.http.routers.beta-ozeliurs.entrypoints=websecure"
-      - "traefik.http.routers.beta-ozeliurs.tls=true"
-      - "traefik.http.routers.beta-ozeliurs.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.ozeliurs.rule=Host(`ozeliurs.com`) || Host(`www.ozeliurs.com`)"
+      - "traefik.http.routers.ozeliurs.entrypoints=websecure"
+      - "traefik.http.routers.ozeliurs.tls=true"
+      - "traefik.http.routers.ozeliurs.tls.certresolver=letsencrypt"
     healthcheck:
       test: [ "CMD", "wget", "-q", "--spider", "http://localhost:5000" ]
 
