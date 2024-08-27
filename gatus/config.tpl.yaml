@@ -9,7 +9,7 @@ alerting:
 endpoints:
   - name: ozeliurs-com
     group: ozeliurs
-    url: "https://ozeliurs.com/"
+    url: "https://www.ozeliurs.com/"
     interval: 1m
     conditions:
       - "[STATUS] == 200"
