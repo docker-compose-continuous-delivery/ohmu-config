@@ -57,7 +57,7 @@ endpoints:
 
   - name: infisical
     group: ozeliurs
-    url: "https://infisical.ozeliurs.com/"
+    url: "https://infisical.ozeliurs.com"
     interval: 1m
     conditions:
       - "[STATUS] == 200"
