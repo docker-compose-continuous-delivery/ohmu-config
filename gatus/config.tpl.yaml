@@ -264,6 +264,43 @@ endpoints:
         description: "Vella didn't pay the bills, the VM is down!"
         send-on-resolved: true
 
+  # ======================= Internal Services ====================
+  - name: proxmox
+    group: internal
+    url: "https://granite.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the Proxmox instance is down!"
+        send-on-resolved: true
+
+  - name: wazuh
+    group: internal
+    url: "https://latite.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the Wazuh instance is down!"
+        send-on-resolved: true
+
+  - name: grafana
+    group: internal
+    url: "https://grafana.adakite.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the Grafana instance is down!"
+        send-on-resolved: true
+
   # ======================= Public Monitors =======================
   - name: github
     group: public
