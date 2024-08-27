@@ -6,6 +6,9 @@ services:
     volumes:
       - ./config.yaml:/config/config.yaml
       - gatus-appdata:/data
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     networks:
       - traefik
     labels:
