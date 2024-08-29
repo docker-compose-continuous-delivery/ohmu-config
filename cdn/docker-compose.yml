@@ -1,0 +1,29 @@
+services:
+  caddy:
+    image: caddy:latest
+    container_name: cdn
+    restart: unless-stopped
+    networks:
+      - traefik
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cdn.rule=Host(`cdn.ozeliurs.com`)"
+      - "traefik.http.routers.cdn.entrypoints=websecure"
+      - "traefik.http.routers.cdn.tls=true"
+      - "traefik.http.routers.cdn.tls.certresolver=letsencrypt"
+      - "traefik.http.services.cdn.loadbalancer.server.port=80"
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/data'
+      o: bind
