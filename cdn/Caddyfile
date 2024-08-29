@@ -1,4 +1,4 @@
 :80 {
-    root * /data
+    root * /cdn
     file_server browse
 }

@@ -1,5 +1,5 @@
 # Make sure the "bookstack" appdata folders exists
-sudo mkdir -p /mnt/data
+sudo mkdir -p /mnt/data/cdn
 
 # List of files to monitor for changes
 FILES_TO_MONITOR=("Caddyfile")

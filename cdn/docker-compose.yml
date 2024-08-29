@@ -7,7 +7,7 @@ services:
       - traefik
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - data:/data
+      - caddy-data:/cdn
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cdn.rule=Host(`cdn.ozeliurs.com`)"
@@ -21,9 +21,9 @@ networks:
     external: true
 
 volumes:
-  data:
+  caddy-data:
     driver: local
     driver_opts:
       type: none
-      device: '/mnt/data'
+      device: '/mnt/data/cdn'
       o: bind
