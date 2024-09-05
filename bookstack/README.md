@@ -12,14 +12,5 @@ An open-source platform to organize and store your documentation in a simple, us
 You can access your BookStack instance here:  
 **[bookstack.ozeliurs.com](https://bookstack.ozeliurs.com)**
 
-## ✨ Features
-- 📝 **Easy Documentation**: Create, organize, and structure your documentation effortlessly.
-- 🔍 **Searchable**: Full-text search for quick access to all your documents.
-- 📂 **Folder Organization**: Keep everything in a clear, book-like structure.
-- 👤 **User Management**: Define roles and permissions for different users.
-
-## 🚀 Setup Information
-To set up your own instance, you can follow the official [BookStack installation guide](https://www.bookstackapp.com/docs/admin/installation/).
-
 ## 📊 Uptime Monitoring
 This instance is being actively monitored, with its uptime status available [here](https://gatus.ozeliurs.com/endpoints/ozeliurs_bookstack).
