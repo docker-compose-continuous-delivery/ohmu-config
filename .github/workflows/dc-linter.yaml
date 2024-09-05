@@ -14,22 +14,19 @@ jobs:
     - name: Find Docker Compose files
       id: set-matrix
       run: |
-        dirs=$(find . -type f -name 'docker-compose.yml' -exec dirname {} \; | grep -v '/\.' | sort -u)
-        if [ -z "$dirs" ]; then
-          echo "::set-output name=directories::[]"
-        else
-          echo "::set-output name=directories::$(echo $dirs | jq -R -s -c 'split("\n") | map(select(. != ""))')"
-        fi
+        dirs=$(find . -mindepth 1 -maxdepth 1 -type d -not -path './.*' -exec basename {} \;)
+        dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+        echo "::set-output name=dirs::$dirs"
 
   validate:
     needs: find-docker-compose-files
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: ${{ fromJson(needs.find-docker-compose-files.outputs.directories) }}
+        directory: ${{ fromJson(needs.find-docker-compose-files.outputs.dirs) }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Validate Docker Compose
-      run: docker-compose -f ${{ matrix.directory }}/docker-compose.yml config
+      run: docker-compose -f "${{ matrix.directory }}/docker-compose.yml" config
