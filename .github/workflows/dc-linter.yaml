@@ -15,7 +15,11 @@ jobs:
       id: set-matrix
       run: |
         dirs=$(find . -type f -name 'docker-compose.yml' -exec dirname {} \; | grep -v '/\.' | sort -u)
-        echo "::set-output name=directories::$(echo $dirs | jq -R -s -c 'split(\"\\n\") | map(select(. != \"\"))')"
+        if [ -z "$dirs" ]; then
+          echo "::set-output name=directories::[]"
+        else
+          echo "::set-output name=directories::$(echo $dirs | jq -R -s -c 'split("\n") | map(select(. != ""))')"
+        fi
 
   validate:
     needs: find-docker-compose-files
