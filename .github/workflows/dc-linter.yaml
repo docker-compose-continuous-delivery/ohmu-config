@@ -30,5 +30,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: debug
+        run: ls -la ${{ matrix.directory }}
+
       - name: Validate Docker Compose
         run: docker-compose -f "${{ matrix.directory }}/docker-compose.yml" config
