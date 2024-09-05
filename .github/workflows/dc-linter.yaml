@@ -1,6 +1,6 @@
 name: Validate Docker Compose
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   find-docker-compose-files:
@@ -8,26 +8,29 @@ jobs:
     outputs:
       directories: ${{ steps.set-matrix.outputs.directories }}
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Find Docker Compose files
-      id: set-matrix
-      run: |
-        dirs=$(find . -mindepth 1 -maxdepth 1 -type d -not -path './.*' -exec basename {} \;)
-        dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(length > 0))')
-        echo "::set-output name=dirs::$dirs"
-        echo "$dirs"
+      - name: Find Docker Compose files
+        id: set-matrix
+        run: |
+          dirs=$(find . -mindepth 1 -maxdepth 1 -type d -not -path './.*' -exec basename {} \;)
+          dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "::set-output name=dirs::$dirs"
+          echo "$dirs"
 
   validate:
     needs: find-docker-compose-files
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        directory: ${{ fromJson(needs.find-docker-compose-files.outputs.dirs) }}
+    #strategy:
+    #  matrix:
+    #   directory: ${{ fromJson(needs.find-docker-compose-files.outputs.dirs) }}
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Debug
+        run: echo ${{ toJson(needs.find-docker-compose-files.outputs.dirs) }}
 
-    - name: Validate Docker Compose
-      run: docker-compose -f "${{ matrix.directory }}/docker-compose.yml" config
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose
+        run: docker-compose -f "${{ matrix.directory }}/docker-compose.yml" config
