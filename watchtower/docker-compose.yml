@@ -6,6 +6,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       WATCHTOWER_MONITOR_ONLY: 'true'
+      WATCHTOWER_POLL_INTERVAL: 604800  # 1 week
       WATCHTOWER_NOTIFICATIONS: email
       WATCHTOWER_NOTIFICATION_EMAIL_FROM: "docker@ozeliurs.com"
       WATCHTOWER_NOTIFICATION_EMAIL_TO: "ozeliurs@gmail.com"
