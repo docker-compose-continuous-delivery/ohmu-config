@@ -277,6 +277,45 @@ endpoints:
         send-on-resolved: true
 
   # ======================= Internal Services ====================
+  - name: fbx-ping
+    group: internal
+    url: "icmp://fbx.ozeliurs.com"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the Freebox is down!"
+        send-on-resolved: true
+
+  - name: fbx-spamhaus
+    group: internal
+    dns:
+      query-name: 187.214.65.82.zen.spamhaus.org
+      query-type: A
+    interval: 1d
+    conditions:
+      - "[BODY] == 127.255.255.254"
+      - "[DNS_RCODE] == NOERROR"
+    #alerts:
+    #    - type: discord
+    #      description: "Hello <@325623032456413186>, the Freebox is blacklisted!"
+    #      send-on-resolved: true
+
+  - name: fbx-tor
+    group: internal
+    dns:
+      query-name: 187.214.65.82.tor.dan.me.uk
+      query-type: A
+    interval: 1d
+    conditions:
+      - "[BODY] != 127.0.0.100"
+      - "[DNS_RCODE] == NOERROR"
+    #alerts:
+    #    - type: discord
+    #      description: "Hello <@325623032456413186>, the Freebox is on the Tor blacklist!"
+    #      send-on-resolved: true
+
   - name: proxmox
     group: internal
     url: "https://granite.ozeliurs.com/"
