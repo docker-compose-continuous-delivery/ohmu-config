@@ -293,7 +293,7 @@ endpoints:
     dns:
       query-name: 187.214.65.82.zen.spamhaus.org
       query-type: A
-    interval: 1d
+    interval: 24h
     conditions:
       - "[BODY] == 127.255.255.254"
       - "[DNS_RCODE] == NOERROR"
@@ -307,7 +307,7 @@ endpoints:
     dns:
       query-name: 187.214.65.82.tor.dan.me.uk
       query-type: A
-    interval: 1d
+    interval: 24h
     conditions:
       - "[BODY] != 127.0.0.100"
       - "[DNS_RCODE] == NOERROR"
