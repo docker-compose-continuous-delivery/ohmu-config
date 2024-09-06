@@ -291,7 +291,7 @@ endpoints:
   - name: fbx-spamhaus
     group: internal
     dns:
-      query-name: 187.214.65.82.zen.spamhaus.org
+      query-name: "187.214.65.82.zen.spamhaus.org"
       query-type: A
     interval: 24h
     conditions:
@@ -305,7 +305,7 @@ endpoints:
   - name: fbx-tor
     group: internal
     dns:
-      query-name: 187.214.65.82.tor.dan.me.uk
+      query-name: "187.214.65.82.tor.dan.me.uk"
       query-type: A
     interval: 24h
     conditions:
