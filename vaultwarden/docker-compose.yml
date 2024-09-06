@@ -4,7 +4,7 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     environment:
-      DOMAIN: "vaultwarden.ozeliurs.com"
+      DOMAIN: "https://vaultwarden.ozeliurs.com"
       SMTP_HOST: "in-v3.mailjet.com"
       SMTP_FROM: "vaultwarden@ozeliurs.com"
       SMTP_PORT: 587
