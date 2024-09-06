@@ -290,6 +290,7 @@ endpoints:
 
   - name: fbx-spamhaus
     group: internal
+    url: "1.1.1.1"
     dns:
       query-name: "187.214.65.82.zen.spamhaus.org"
       query-type: A
@@ -304,6 +305,7 @@ endpoints:
 
   - name: fbx-tor
     group: internal
+    url: "1.1.1.1"
     dns:
       query-name: "187.214.65.82.tor.dan.me.uk"
       query-type: A
