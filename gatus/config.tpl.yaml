@@ -407,13 +407,3 @@ endpoints:
     interval: 24h
     conditions:
       - "[DNS_RCODE] == NOERROR"
-
-  - name: dns-uncensoreddns
-    group: dns
-    url: "91.239.100.100"
-    dns:
-      query-name: "example.com"
-      query-type: A
-    interval: 24h
-    conditions:
-      - "[DNS_RCODE] == NOERROR"
