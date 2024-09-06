@@ -366,3 +366,53 @@ endpoints:
       - type: discord
         description: "Hello, GitHub is down!"
         send-on-resolved: true
+
+  - name: dns-cloudflare
+    group: public
+    url: "1.1.1.1"
+    dns:
+      query-name: "example.com"
+      query-type: A
+    interval: 24h
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: dns-google
+    group: public
+    url: "8.8.8.8"
+    dns:
+      query-name: "example.com"
+      query-type: A
+    interval: 24h
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: dns-quad9
+    group: public
+    url: "9.9.9.9"
+    dns:
+      query-name: "example.com"
+      query-type: A
+    interval: 24h
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: dns-opendns
+    group: public
+    url: "208.67.222.222"
+    dns:
+      query-name: "example.com"
+      query-type: A
+    interval: 24h
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: dns-uncensoreddns
+    group: public
+    url: "91.239.100.100"
+    dns:
+      query-name: "example.com"
+      query-type: A
+    interval: 24h
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
