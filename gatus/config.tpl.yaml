@@ -367,8 +367,9 @@ endpoints:
         description: "Hello, GitHub is down!"
         send-on-resolved: true
 
+  # ======================= DNS Monitors =======================
   - name: dns-cloudflare
-    group: public
+    group: dns
     url: "1.1.1.1"
     dns:
       query-name: "example.com"
@@ -378,7 +379,7 @@ endpoints:
       - "[DNS_RCODE] == NOERROR"
 
   - name: dns-google
-    group: public
+    group: dns
     url: "8.8.8.8"
     dns:
       query-name: "example.com"
@@ -388,7 +389,7 @@ endpoints:
       - "[DNS_RCODE] == NOERROR"
 
   - name: dns-quad9
-    group: public
+    group: dns
     url: "9.9.9.9"
     dns:
       query-name: "example.com"
@@ -398,7 +399,7 @@ endpoints:
       - "[DNS_RCODE] == NOERROR"
 
   - name: dns-opendns
-    group: public
+    group: dns
     url: "208.67.222.222"
     dns:
       query-name: "example.com"
@@ -408,7 +409,7 @@ endpoints:
       - "[DNS_RCODE] == NOERROR"
 
   - name: dns-uncensoreddns
-    group: public
+    group: dns
     url: "91.239.100.100"
     dns:
       query-name: "example.com"
