@@ -312,7 +312,7 @@ endpoints:
     interval: 24h
     conditions:
       - "[BODY] != 127.0.0.100"
-      - "[DNS_RCODE] == NOERROR"
+      - "[DNS_RCODE] == NXDOMAIN"
     #alerts:
     #    - type: discord
     #      description: "Hello <@325623032456413186>, the Freebox is on the Tor blacklist!"
