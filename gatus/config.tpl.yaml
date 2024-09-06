@@ -298,10 +298,10 @@ endpoints:
     conditions:
       - "[BODY] == 127.255.255.254"
       - "[DNS_RCODE] == NOERROR"
-    #alerts:
-    #    - type: discord
-    #      description: "Hello <@325623032456413186>, the Freebox is blacklisted!"
-    #      send-on-resolved: true
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the Freebox is blacklisted!"
+        send-on-resolved: true
 
   - name: fbx-tor
     group: internal
@@ -313,10 +313,10 @@ endpoints:
     conditions:
       - "[BODY] != 127.0.0.100"
       - "[DNS_RCODE] == NXDOMAIN"
-    #alerts:
-    #    - type: discord
-    #      description: "Hello <@325623032456413186>, the Freebox is on the Tor blacklist!"
-    #      send-on-resolved: true
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the Freebox is on the Tor blacklist!"
+        send-on-resolved: true
 
   - name: proxmox
     group: internal
