@@ -3,6 +3,13 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
+    environment:
+      SMTP_HOST: "in-v3.mailjet.com"
+      SMTP_FROM: "vaultwarden@ozeliurs.com"
+      SMTP_PORT: 587
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+
     volumes:
       - vaultwarden-appdata:/data/
     networks:
