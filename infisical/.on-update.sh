@@ -4,7 +4,4 @@ if [ ! -f .env ]; then
     echo "AUTH_SECRET=$(openssl rand -base64 32)" >> .env
 fi
 
-# Restart all containers
-docker compose up -d --remove-orphans
-
-echo "Successfully updated!"
+echo "Infisical does not update automatically, please check for updates manually"
