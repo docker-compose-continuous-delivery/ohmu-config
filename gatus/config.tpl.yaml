@@ -140,6 +140,14 @@ endpoints:
         description: "Hello <@325623032456413186>, the website paper.ozeliurs.com is down!"
         send-on-resolved: true
 
+  - name: gatus
+    group: ozeliurs
+    url: "https://gatus.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+
   # ======================= Axel Services =======================
   - name: grafana
     group: axel
