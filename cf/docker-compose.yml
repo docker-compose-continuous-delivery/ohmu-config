@@ -1,0 +1,28 @@
+version: '3'
+services:
+  cf:
+    image: nginx
+    container_name: cf
+    restart: unless-stopped
+    volumes:
+      - cf-appdata:/usr/share/nginx/html:ro
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cf-ozeliurs-com.rule=Host(`cf.ozeliurs.com`)"
+      - "traefik.http.routers.cf-ozeliurs-com.entrypoints=websecure"
+      - "traefik.http.routers.cf-ozeliurs-com.tls=true"
+      - "traefik.http.routers.cf-ozeliurs-com.tls.certresolver=letsencrypt"
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  cf-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/cf'
+      o: bind
