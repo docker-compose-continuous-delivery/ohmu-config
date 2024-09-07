@@ -1,0 +1,4 @@
+:80 {
+    root * /cf
+    file_server browse
+}
