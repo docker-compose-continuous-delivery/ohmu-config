@@ -1,21 +1,20 @@
-version: '3'
 services:
   cf:
     image: caddy:latest
     container_name: cf
     restart: unless-stopped
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - cf-appdata:/cf:ro
     networks:
       - traefik
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - cf-appdata:/cf
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.cf-ozeliurs-com.rule=Host(`cf.ozeliurs.com`)"
-      - "traefik.http.routers.cf-ozeliurs-com.entrypoints=websecure"
-      - "traefik.http.routers.cf-ozeliurs-com.tls=true"
-      - "traefik.http.routers.cf-ozeliurs-com.tls.certresolver=letsencrypt"
-      - "traefik.http.services.cf-ozeliurs-com.loadbalancer.server.port=80"
+      - "traefik.http.routers.cf.rule=Host(`cf.ozeliurs.com`)"
+      - "traefik.http.routers.cf.entrypoints=websecure"
+      - "traefik.http.routers.cf.tls=true"
+      - "traefik.http.routers.cf.tls.certresolver=letsencrypt"
+      - "traefik.http.services.cf.loadbalancer.server.port=80"
 
 networks:
   traefik:
