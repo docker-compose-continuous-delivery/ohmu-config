@@ -47,7 +47,7 @@ source .env
 set +a
 
 # Run the on-update.sh script
-echo "Running on-update.sh for each folder ..."
+echo "${YELLOW}[+] Running on-update.sh for each folder ...${NC}"
 for f in */; do
     if [ -f "$f.on-update.sh" ]; then
         echo "${YELLOW}[+] Running on-update.sh in $f${NC}"
