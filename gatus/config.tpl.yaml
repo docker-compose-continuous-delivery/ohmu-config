@@ -56,6 +56,18 @@ endpoints:
         description: "Hello <@325623032456413186>, the website flame.ozeliurs.com is down!"
         send-on-resolved: true
 
+  - name: wakapi
+    group: ozeliurs
+    url: "https://wakapi.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the website wakapi.ozeliurs.com is down!"
+        send-on-resolved: true
+
   - name: forgejo
     group: ozeliurs
     url: "https://git.ozeliurs.com/"
