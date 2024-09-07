@@ -1,6 +1,6 @@
 services:
   wakapi:
-    image: wakapi/wakapi
+    image: ghcr.io/muety/wakapi
     restart: unless-stopped
     container_name: wakapi
     environment:
