@@ -34,5 +34,3 @@ else
     echo "No changes detected in monitored files"
     docker compose up -d --remove-orphans
 fi
-
-echo "Successfully updated!"

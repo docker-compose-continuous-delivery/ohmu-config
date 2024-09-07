@@ -4,5 +4,3 @@ sudo mkdir -p /mnt/appdata/paperless/media
 
 # Restart all containers
 docker compose up -d --remove-orphans
-
-echo "Successfully updated!"

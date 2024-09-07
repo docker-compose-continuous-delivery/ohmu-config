@@ -13,8 +13,5 @@ else
     echo "Configs are identical, no update needed"
 fi
 
-
 # Restart all containers
 docker compose up -d --remove-orphans
-
-echo "Successfully updated!"
