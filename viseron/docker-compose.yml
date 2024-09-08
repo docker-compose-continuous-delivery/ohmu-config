@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.viseron.tls.certresolver=letsencrypt"
       - "traefik.http.services.viseron.loadbalancer.server.port=8888"
       - "traefik.http.routers.viseron.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=admin:${VISERON_PASSWORD}"
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$$2y$$05$$0wIWP5rte.RxpW5fWIp6Y.eGGbz/XF.zQ9XmAKlq0lK1pacedwpze"
 
 networks:
   traefik:
