@@ -68,6 +68,12 @@ while IFS= read -r line; do
   # Remove both single and double quotes from the value if they exist
   value=$(echo "$value" | sed "s/^'//; s/'\$//; s/^\"//; s/\"$//")
 
+  # Escape & with \& to prevent sed from interpreting it as a special character
+  value=$(echo "$value" | sed 's/&/\\&/g')
+
+  # Escape / with \/ to prevent sed from interpreting it as a delimiter
+  value=$(echo "$value" | sed 's/\//\\\//g')
+
   # Print verbose message if enabled
   if $VERBOSE; then
     echo "Replacing {{ $key }} with \"$value\" in $OUTPUT_FILE..."
