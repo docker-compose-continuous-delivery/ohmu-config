@@ -1,0 +1,30 @@
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest    # Using the stable branch from the official dockerhub repo.
+    container_name: kavita
+    restart: unless-stopped
+    volumes:
+      - books:/books
+      - kavita-appdata:/kavita/config
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kavita.rule=Host(`kavita.ozeliurs.com`)"
+      - "traefik.http.routers.kavita.entrypoints=websecure"
+      - "traefik.http.routers.kavita.tls.certresolver=letsencrypt"
+      - "traefik.http.services.kavita.loadbalancer.server.port=5000"
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  kavita-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/kavita'
+      o: bind
+  books:
+    external: true
