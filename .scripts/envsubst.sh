@@ -80,7 +80,7 @@ while IFS= read -r line; do
   fi
 
   # Replace the placeholder with the value in the output YAML file
-  sed -i '' -e "s|{{ $key }}|$value|g" "$OUTPUT_FILE"
+  sed -i -e "s|{{ $key }}|$value|g" "$OUTPUT_FILE"
 done < "$ENV_FILE"
 
 echo "Replacement done! Check $OUTPUT_FILE for results."
