@@ -8,32 +8,32 @@ services:
       - PGID=1000
       - WEBUI_PORT=8090
     volumes:
-        - ispy-appdata:/AgentDVR/Media/XML
-        - ispy-data:/AgentDVR/Media/WebServerRoot/Media
+      - ispy-appdata:/AgentDVR/Media/XML
+      - ispy-data:/AgentDVR/Media/WebServerRoot/Media
     networks:
       - traefik
     labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.ispy.rule=Host(`ispy.ozeliurs.com`)"
-        - "traefik.http.routers.ispy.entrypoints=websecure"
-        - "traefik.http.routers.ispy.tls=true"
-        - "traefik.http.routers.ispy.tls.certresolver=letsencrypt"
-        - "traefik.http.services.ispy.loadbalancer.server.port=8090"
+      - "traefik.enable=true"
+      - "traefik.http.routers.ispy.rule=Host(`ispy.ozeliurs.com`)"
+      - "traefik.http.routers.ispy.entrypoints=websecure"
+      - "traefik.http.routers.ispy.tls=true"
+      - "traefik.http.routers.ispy.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ispy.loadbalancer.server.port=8090"
 
 networks:
-    traefik:
-        external: true
+  traefik:
+    external: true
 
 volumes:
-    ispy-appdata:
-        driver: local
-        driver_opts:
-        type: none
-        device: '/mnt/appdata/ispy'
-        o: bind
-    ispy-data:
-        driver: local
-        driver_opts:
-        type: none
-        device: '/mnt/data/ispy'
-        o: bind
+  ispy-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/ispy'
+      o: bind
+  ispy-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/data/ispy'
+      o: bind
