@@ -1,0 +1,36 @@
+services:
+  viseron:
+    image: roflcoopter/viseron:latest
+    container_name: viseron
+    volumes:
+      - viseron-data:/recordings
+      - viseron-appdata:/config
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.viseron.rule=Host(`viseron.ozeliurs.com`)"
+      - "traefik.http.routers.viseron.entrypoints=websecure"
+      - "traefik.http.routers.viseron.tls=true"
+      - "traefik.http.routers.viseron.tls.certresolver=letsencrypt"
+      - "traefik.http.services.viseron.loadbalancer.server.port=8888"
+
+networks:
+  traefik:
+    external: true
+
+
+volumes:
+  viseron-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/data/viseron'
+      o: bind
+  viseron-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/viseron'
+      o: bind
