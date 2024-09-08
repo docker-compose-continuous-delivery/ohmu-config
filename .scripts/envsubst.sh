@@ -80,6 +80,9 @@ while IFS= read -r line; do
   fi
 
   # Replace the placeholder with the value in the output YAML file
+  if $VERBOSE; then
+    echo "Running sed -i -e \"s|{{ $key }}|$value|g\" \"$OUTPUT_FILE\" ..."
+  fi
   sed -i -e "s|{{ $key }}|$value|g" "$OUTPUT_FILE"
 done < "$ENV_FILE"
 
