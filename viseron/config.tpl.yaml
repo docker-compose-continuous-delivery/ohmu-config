@@ -1,0 +1,21 @@
+ffmpeg:
+  camera:
+    datacenter:
+      name: Datacenter
+      host: 82.65.214.187
+      port: 554
+      path: /stream1
+      username: { DATACENTER_USER }
+      password: { DATACENTER_PASSWORD }
+
+mog2:
+  motion_detector:
+    cameras:
+      datacenter:
+        fps: 1
+
+
+nvr:
+  datacenter:
+
+webserver:

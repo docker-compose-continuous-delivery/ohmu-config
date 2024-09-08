@@ -4,7 +4,7 @@ services:
     container_name: viseron
     volumes:
       - viseron-data:/recordings
-      - viseron-appdata:/config
+      - ./config.yaml:/config/config.yaml:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
@@ -27,10 +27,4 @@ volumes:
     driver_opts:
       type: none
       device: '/mnt/data/viseron'
-      o: bind
-  viseron-appdata:
-    driver: local
-    driver_opts:
-      type: none
-      device: '/mnt/appdata/viseron'
       o: bind
