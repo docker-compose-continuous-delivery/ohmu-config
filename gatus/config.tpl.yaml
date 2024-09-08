@@ -9,7 +9,7 @@ connectivity:
 
 alerting:
   discord:
-    webhook-url: "{{ DISCORD_WEBHOOK_URL }}"
+    webhook-url: "${DISCORD_WEBHOOK_URL}"
 
 endpoints:
   # ======================= Ozeliurs Services =======================

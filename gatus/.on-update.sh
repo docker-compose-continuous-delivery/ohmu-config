@@ -4,7 +4,8 @@ sudo mkdir -p /mnt/appdata/gatus
 # Update secrets
 ../.scripts/update_secrets.sh 13bd2f48-dcac-4f12-82c5-0857af82cfa1 .env
 
-../.scripts/envsubst.sh .env config.tpl.yaml config.yaml
+export $(grep -v '^#' .env | xargs)
+envsubst < config.tpl.yaml > config.yaml
 
 # List of files to monitor for changes
 FILES_TO_MONITOR=("config.tpl.yaml")

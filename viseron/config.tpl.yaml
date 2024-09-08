@@ -1,3 +1,6 @@
+logger:
+  default_level: debug
+
 ffmpeg:
   camera:
     datacenter:
@@ -5,8 +8,8 @@ ffmpeg:
       host: 82.65.214.187
       port: 554
       path: /stream1
-      username: { DATACENTER_USER }
-      password: { DATACENTER_PASSWORD }
+      username: ${DATACENTER_USER}
+      password: ${DATACENTER_PASSWORD}
 
 mog2:
   motion_detector:
