@@ -1,11 +1,10 @@
 services:
   hedgedoc:
-    image: quay.io/hedgedoc/hedgedoc:latest
+    image: quay.io/hedgedoc/hedgedoc:1.10.0
     restart: unless-stopped
     container_name: hedgedoc
     environment:
       CMD_DOMAIN: "hedgedoc.ozeliurs.com"
-      CMD_CSP_ENABLE: "false"
       CMD_PROTOCOL_USESSL: "true"
       CMD_URL_ADDPORT: "false"
       CMD_EMAIL: "true"
