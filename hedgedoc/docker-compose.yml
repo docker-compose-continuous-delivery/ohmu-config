@@ -5,6 +5,7 @@ services:
     container_name: hedgedoc
     environment:
       CMD_DOMAIN: "hedgedoc.ozeliurs.com"
+      CMD_ALLOW_ORIGIN: "hedgedoc.ozeliurs.com"
       CMD_PROTOCOL_USESSL: "true"
       CMD_URL_ADDPORT: "false"
       CMD_EMAIL: "true"
