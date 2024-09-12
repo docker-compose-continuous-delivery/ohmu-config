@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:8
+    container_name: forgejo
+    restart: unless-stopped
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - SSH_LISTEN_PORT=2222
+      - SSH_PORT=2222
+    ports:
+      - "2222:2222"
+    networks:
+      - traefik
+    volumes:
+      - forgejo-appdata:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.forgejo.rule=Host(`git.ozeliurs.com`)"
+      - "traefik.http.routers.forgejo.entrypoints=websecure"
+      - "traefik.http.services.forgejo.loadbalancer.server.port=3000"
+      - "traefik.http.routers.forgejo.tls.certresolver=letsencrypt"
+
+      - "com.centurylinklabs.watchtower.enable=true"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/" ]
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  forgejo-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/mnt/appdata/forgejo'
+      o: bind
