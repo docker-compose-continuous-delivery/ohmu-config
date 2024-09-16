@@ -15,10 +15,9 @@ services:
       REDIS_URL: 'redis://redis:6379'
       MAIL_DRIVER: "smtp"
       SMTP_HOST: "in-v3.mailjet.com"
-      SMTP_PORT: "456"
+      SMTP_PORT: "587"
       SMTP_USERNAME: "${SMTP_USERNAME}"
       SMTP_PASSWORD: "${SMTP_PASSWORD}"
-      SMTP_SECURE: "true"
       MAIL_FROM_ADDRESS: "docmost@ozeliurs.com"
       MAIL_FROM_NAME: "Docmost"
     volumes:
