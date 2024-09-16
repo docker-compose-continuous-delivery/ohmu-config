@@ -8,7 +8,7 @@ services:
       WAKAPI_DB_NAME: "wakapi"
       WAKAPI_DB_USER: "wakapi"
       WAKAPI_DB_PASSWORD: "wakapi"
-      WAKAPI_DB_HOST: "db"
+      WAKAPI_DB_HOST: "wakapi-db"
       WAKAPI_DB_PORT: "5432"
       ENVIRONMENT: "prod"
     networks:
@@ -21,7 +21,7 @@ services:
       - "traefik.http.routers.wakapi.tls.certresolver=letsencrypt"
       - "traefik.http.services.wakapi.loadbalancer.server.port=3000"
 
-  db:
+  wakapi-db:
     image: postgres:12.3
     restart: unless-stopped
     container_name: wakapi-db
