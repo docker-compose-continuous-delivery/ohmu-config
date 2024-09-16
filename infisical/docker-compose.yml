@@ -1,12 +1,12 @@
 services:
-  db-migration:
+  infisical-db-migration:
     container_name: infisical-db-migration
     depends_on:
-      db:
+      infisical-db:
         condition: service_healthy
     image: infisical/infisical:latest-postgres
     environment:
-      DB_CONNECTION_URI: "postgresql://infisical:infisical@db:5432/infisical"
+      DB_CONNECTION_URI: "postgresql://infisical:infisical@infisical-db:5432/infisical"
     command: npm run migration:latest
     networks:
       - traefik
@@ -17,16 +17,16 @@ services:
     container_name: infisical-backend
     restart: unless-stopped
     depends_on:
-      db:
+      infisical-db:
         condition: service_healthy
       redis:
         condition: service_started
-      db-migration:
+      infisical-db-migration:
         condition: service_completed_successfully
     image: infisical/infisical:latest-postgres
     environment:
       SITE_URL: "https://infisical.ozeliurs.com"
-      DB_CONNECTION_URI: "postgresql://infisical:infisical@db:5432/infisical"
+      DB_CONNECTION_URI: "postgresql://infisical:infisical@infisical-db:5432/infisical"
       REDIS_URL: "redis://redis:6379"
 
       ENCRYPTION_KEY: $ENCRYPTION_KEY
@@ -62,7 +62,7 @@ services:
     labels:
       - "traefik.enable=false"
 
-  db:
+  infisical-db:
     container_name: infisical-db
     image: postgres:14-alpine
     restart: always
