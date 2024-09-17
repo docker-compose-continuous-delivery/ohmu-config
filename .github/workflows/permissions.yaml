@@ -1,0 +1,23 @@
+name: Validate Docker Compose
+
+on: [ push, pull_request ]
+
+jobs:
+  execute-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose
+        run: |
+          exit_code=0
+          for file in $(find . -name '.on-update.sh'); do
+            echo "Validating $file"
+            if [ ! -x "$file" ]; then
+              echo "Error: $file is not executable"
+              exit_code=1
+            fi
+          done
+          exit $exit_code
