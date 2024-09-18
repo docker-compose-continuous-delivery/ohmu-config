@@ -9,7 +9,7 @@ services:
       CMD_URL_ADDPORT: "false"
       CMD_EMAIL: "true"
       CMD_DOCUMENT_MAX_LENGTH: "1000000000"
-      CMD_DB_URL: "postgres://hedgedoc:3&&HeyWjuk6@vB@dFwBZ@hedgedoc_db:5432/hedgedoc"
+      CMD_DB_URL: "postgres://hedgedoc:${POSTGRES_PASSWORD}@hedgedoc_db:5432/hedgedoc"
     volumes:
       - hedgedoc-appdata:/hedgedoc/public/uploads
     depends_on:
@@ -31,7 +31,7 @@ services:
     environment:
       POSTGRES_USER: "hedgedoc"
       POSTGRES_DB: "hedgedoc"
-      POSTGRES_PASSWORD: "3&&HeyWjuk6@vB@dFwBZ"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - hedgedoc-dbdata:/var/lib/postgresql/data
     networks:
