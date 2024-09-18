@@ -12,7 +12,7 @@ jobs:
 
       - name: Check for service name collisions
         run: |
-          services=$(find . -name 'docker-compose.yml' -exec grep -h '^[[:space:]]*[^#[:space:]].*:' {} \; | awk -F: '{print $1}' | sort | uniq -d)
+          services=$(find . -name 'docker-compose.yml' -exec docker compose ps --services -f {} + | sort | uniq -d)
           if [ -n "$services" ]; then
             echo "Error: Service name collisions found:"
             echo "$services"
