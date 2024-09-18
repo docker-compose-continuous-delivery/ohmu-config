@@ -1,6 +1,10 @@
 name: Validate Docker Compose
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   find-docker-compose-files:
@@ -32,3 +36,22 @@ jobs:
 
       - name: Validate Docker Compose
         run: docker compose -f "${{ matrix.directory }}/docker-compose.yml" config
+
+  check-collisions:
+    needs: validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for service name collisions
+        run: |
+          services=$(find . -name 'docker-compose.yml' -exec yq eval '.services | keys' {} + | sort | uniq -d)
+          if [ -n "$services" ]; then
+              echo "Error: Duplicate service names found:"
+              echo "$services"
+              exit 1
+          else
+              echo "No duplicate service names found."
+          fi
