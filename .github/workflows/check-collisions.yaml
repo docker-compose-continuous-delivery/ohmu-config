@@ -12,4 +12,5 @@ jobs:
 
       - name: Check for service name collisions
         run: |
-          services=$(find . -name 'docker-compose.yml' -exec docker compose -f {} up -d --dry-run \;)
+          services=$(find . -name 'docker-compose.yml' -exec docker compose -f {} up -d --dry-run \; 2>&1 | grep 'DRY-RUN MODE -  Container' | awk '{print $6}' | sort | uniq -d)
+          echo "Found service name collisions: $services"
