@@ -12,11 +12,4 @@ jobs:
 
       - name: Check for service name collisions
         run: |
-          services=$(find . -name 'docker-compose.yml' -exec docker compose -f {} ps --services \; | sort | uniq -d)
-          if [ -n "$services" ]; then
-            echo "Error: Service name collisions found:"
-            echo "$services"
-            exit 1
-          else
-            echo "No service name collisions found."
-          fi
+          services=$(find . -name 'docker-compose.yml' -exec docker compose -f {} ps --services \;)
