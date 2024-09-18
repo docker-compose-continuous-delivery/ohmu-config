@@ -12,5 +12,7 @@ jobs:
 
       - name: Check for service name collisions
         run: |
-          services=$(find . -name 'docker-compose.yml' -exec yq -o 'services.*' {} + | awk -F ' ' '{print $2}' | sort | uniq -d)
+          find . -name 'docker-compose.yml' -exec yq eval '.services | keys | .[]' {} +
+          find . -name 'docker-compose.yml' -exec yq eval '.services | keys | .[]' {} + | sort | uniq -d
+          services=$(find . -name 'docker-compose.yml' -exec yq eval '.services | keys | .[]' {} + | sort | uniq -d)
           echo "Found service name collisions: $services"
