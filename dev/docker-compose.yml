@@ -1,0 +1,5 @@
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: my-db
+    restart: always
