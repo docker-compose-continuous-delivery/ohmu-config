@@ -19,15 +19,24 @@ services:
       - "traefik.http.routers.gatus.tls.certresolver=letsencrypt"
       - "traefik.http.services.gatus.loadbalancer.server.port=8080"
 
+  gatus-discord-bot:
+    image: ghcr.io/ozeliurs/gatus-discord-bot:latest
+    container_name: gatus-discord-bot
+    restart: unless-stopped
+    environment:
+      GATUS_API_URL: "https://gatus.ozeliurs.com/"
+      DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
+    networks:
+      - traefik
+
 networks:
   traefik:
     external: true
-
 
 volumes:
   gatus-appdata:
     driver: local
     driver_opts:
       type: none
-      device: '/mnt/appdata/gatus'
+      device: "/mnt/appdata/gatus"
       o: bind
