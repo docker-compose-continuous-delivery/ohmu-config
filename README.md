@@ -1,3 +1,9 @@
+![Validate Docker Compose](https://github.com/docker-compose-continuous-delivery/ohmu-config/actions/workflows/dc-linter.yaml/badge.svg?branch=main)
+![SonarQube Alert Status](https://sonarqube.devops-tools.apoorva64.com/api/project_badges/measure?project=Dunite-GitOps&metric=alert_status&token=sqb_f4d5d68b2b1d5f3993203d511955fec861e649b9)
+![SonarQube Reliability Rating](https://sonarqube.devops-tools.apoorva64.com/api/project_badges/measure?project=Dunite-GitOps&metric=reliability_rating&token=sqb_f4d5d68b2b1d5f3993203d511955fec861e649b9)
+![SonarQube Security Rating](https://sonarqube.devops-tools.apoorva64.com/api/project_badges/measure?project=Dunite-GitOps&metric=security_rating&token=sqb_f4d5d68b2b1d5f3993203d511955fec861e649b9)
+![SonarQube Maintainability](https://sonarqube.devops-tools.apoorva64.com/api/project_badges/measure?project=Dunite-GitOps&metric=sqale_index&token=sqb_f4d5d68b2b1d5f3993203d511955fec861e649b9)
+
 ## Installation
 
 Add the cronjob to your crontab file:
