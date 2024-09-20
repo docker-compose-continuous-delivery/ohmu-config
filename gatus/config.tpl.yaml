@@ -355,6 +355,74 @@ endpoints:
         description: "Hello <@325623032456413186>, the Grafana instance is down!"
         send-on-resolved: true
 
+  # ======================= Kubernetes Nodes ======================
+
+  - name: node-appoorva
+    group: kubernetes
+    url: "icmp://158.178.207.158"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the node-appoorva is down!"
+        send-on-resolved: true
+
+  - name: node-maxime
+    group: kubernetes
+    url: "icmp://158.101.222.29"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the node-maxime is down!"
+        send-on-resolved: true
+
+  - name: node-nino2
+    group: kubernetes
+    url: "icmp://130.61.31.16"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the node-nino2 is down!"
+        send-on-resolved: true
+
+  - name: node-raphael
+    group: kubernetes
+    url: "icmp://129.151.254.9"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the node-raphael is down!"
+        send-on-resolved: true
+
+  - name: node-raphael2
+    group: kubernetes
+    url: "icmp://204.216.214.156"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the node-raphael2 is down!"
+        send-on-resolved: true
+
+  - name: node-tom
+    group: kubernetes
+    url: "icmp://129.151.255.181"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: discord
+        description: "Hello <@325623032456413186>, the node-tom is down!"
+        send-on-resolved: true
+
   # ======================= Public Monitors =======================
   - name: github
     group: public
