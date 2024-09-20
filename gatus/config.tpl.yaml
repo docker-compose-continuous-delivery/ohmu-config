@@ -357,7 +357,7 @@ endpoints:
 
   # ======================= Kubernetes Nodes ======================
 
-  - name: node-appoorva
+  - name: node-apoorva
     group: kubernetes
     url: "icmp://158.178.207.158"
     interval: 1m
@@ -365,7 +365,7 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: discord
-        description: "Hello <@325623032456413186>, the node-appoorva is down!"
+        description: "Hello <@325623032456413186>, the node-apoorva is down!"
         send-on-resolved: true
 
   - name: node-maxime
