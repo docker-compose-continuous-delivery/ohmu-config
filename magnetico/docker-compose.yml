@@ -7,8 +7,6 @@ services:
     network_mode: "host"
     command:
       - "--indexer-addr=0.0.0.0:1212"
-    networks:
-      - traefik
 
   magneticow:
     image: boramalper/magneticow:latest
