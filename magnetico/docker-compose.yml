@@ -1,0 +1,49 @@
+services:
+  magneticod:
+    image: boramalper/magneticod:latest
+    volumes:
+      - magneticod-data:/root/.local/share/magneticod
+      - magneticod-config:/root/.config/magneticod
+    network_mode: "host"
+    command:
+      - "--indexer-addr=0.0.0.0:1212"
+    networks:
+      - traefik
+
+  magneticow:
+    image: boramalper/magneticow:latest
+    volumes:
+      - magneticod-data:/root/.local/share/magneticod
+      - magneticow-config:/root/.config/magneticow
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.magneticow.rule=Host(`magnetico.ozeliurs.com`)"
+      - "traefik.http.routers.magneticow.entrypoints=websecure"
+      - "traefik.http.routers.magneticow.tls.certresolver=letsencrypt"
+      - "traefik.http.services.magneticow.loadbalancer.server.port=8080"
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  magneticod-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/magnetico/data"
+      o: bind
+  magneticod-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/magnetico/magneticod"
+      o: bind
+  magneticow-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/magnetico/magneticow"
+      o: bind
