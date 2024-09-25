@@ -21,7 +21,7 @@ networks:
     external: true
 
 volumes:
-  magneticod-data:
+  magnetico-data:
     driver: local
     driver_opts:
       type: none
