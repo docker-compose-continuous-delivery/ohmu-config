@@ -1,18 +1,12 @@
+version: "3.9"
 services:
-  magneticod:
-    image: boramalper/magneticod:latest
+  tgragnato:
+    image: "ghcr.io/tgragnato/magnetico:latest"
+    container_name: "magnetico"
+    restart: unless-stopped
+    command: "--database=sqlite3:///data/magnetico.sqlite3"
     volumes:
-      - magneticod-data:/root/.local/share/magneticod
-      - magneticod-config:/root/.config/magneticod
-    network_mode: "host"
-    command:
-      - "--indexer-addr=0.0.0.0:1212"
-
-  magneticow:
-    image: boramalper/magneticow:latest
-    volumes:
-      - magneticod-data:/root/.local/share/magneticod
-      - magneticow-config:/root/.config/magneticow
+      - "magnetico-data:/data"
     networks:
       - traefik
     labels:
@@ -27,21 +21,9 @@ networks:
     external: true
 
 volumes:
-  magneticod-data:
+  magnetico-data:
     driver: local
     driver_opts:
       type: none
-      device: "/mnt/appdata/magnetico/data"
-      o: bind
-  magneticod-config:
-    driver: local
-    driver_opts:
-      type: none
-      device: "/mnt/appdata/magnetico/magneticod"
-      o: bind
-  magneticow-config:
-    driver: local
-    driver_opts:
-      type: none
-      device: "/mnt/appdata/magnetico/magneticow"
+      device: "/mnt/appdata/magnetico"
       o: bind
