@@ -11,10 +11,10 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.magneticow.rule=Host(`magnetico.ozeliurs.com`)"
-      - "traefik.http.routers.magneticow.entrypoints=websecure"
-      - "traefik.http.routers.magneticow.tls.certresolver=letsencrypt"
-      - "traefik.http.services.magneticow.loadbalancer.server.port=8080"
+      - "traefik.http.routers.magnetico.rule=Host(`magnetico.ozeliurs.com`)"
+      - "traefik.http.routers.magnetico.entrypoints=websecure"
+      - "traefik.http.routers.magnetico.tls.certresolver=letsencrypt"
+      - "traefik.http.services.magnetico.loadbalancer.server.port=8080"
 
 networks:
   traefik:
