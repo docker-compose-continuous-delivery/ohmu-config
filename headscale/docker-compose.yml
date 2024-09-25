@@ -1,5 +1,4 @@
 services:
-
   headscale:
     image: headscale/headscale:0.22.3
     container_name: headscale
@@ -23,10 +22,19 @@ services:
       - "traefik.http.routers.headscale.tls.certresolver=letsencrypt"
       - "traefik.http.services.headscale.loadbalancer.server.port=8080"
     healthcheck:
-      test: [ "CMD", "headscale", "users", "list" ]
+      test: ["CMD", "headscale", "users", "list"]
       interval: 30s
       timeout: 10s
       retries: 3
+
+  discord-headscale-bot:
+    image: ghcr.io/ozeliurs/headscale-discord-bot:latest
+    container_name: discord-headscale-bot
+    restart: unless-stopped
+    environment:
+      HEADSCALE_API_URL: ${HEADSCALE_API_URL}
+      HEADSCALE_API_KEY: ${HEADSCALE_API_KEY}
+      DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN}
 
 networks:
   traefik:
@@ -37,5 +45,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '/mnt/appdata/headscale'
+      device: "/mnt/appdata/headscale"
       o: bind
