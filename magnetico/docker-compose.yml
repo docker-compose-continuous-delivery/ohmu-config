@@ -4,7 +4,7 @@ services:
     image: "ghcr.io/tgragnato/magnetico:latest"
     container_name: "magnetico"
     restart: unless-stopped
-    command: "--database=sqlite3:///data/magnetico.sqlite3"
+    command: "--database=sqlite3:///data/magnetico.sqlite3 --addr=0.0.0.0:8080"
     volumes:
       - "magnetico-data:/data"
     networks:
