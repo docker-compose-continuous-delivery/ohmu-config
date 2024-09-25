@@ -15,6 +15,8 @@ services:
       - "traefik.http.routers.magnetico.entrypoints=websecure"
       - "traefik.http.routers.magnetico.tls.certresolver=letsencrypt"
       - "traefik.http.services.magnetico.loadbalancer.server.port=8080"
+      - "traefik.http.routers.magnetico.middlewares=magnetico-auth"
+      - "traefik.http.middlewares.magnetico-auth.basicauth.users=admin:$$apr1$$2UdV6.CB$$.abJTJmhd/7fhPIafSSpm0"
 
 networks:
   traefik:
