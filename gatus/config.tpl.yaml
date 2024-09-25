@@ -153,6 +153,31 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 48h"
 
+  # ======================= Apoo Services =======================
+  - name: sonarqube
+    group: apoo
+    url: "https://sonarqube.devops-tools.apoorva64.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello, your SonarQube instance is down!"
+        send-on-resolved: true
+
+  - name: sentry
+    group: apoo
+    url: "https://sentry.ozeliurs.com/"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    alerts:
+      - type: discord
+        description: "Hello, your Sentry instance is down!"
+        send-on-resolved: true
+
   # ======================= Axel Services =======================
   - name: grafana
     group: axel
