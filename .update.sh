@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-# Define color codes
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
+# Detect if the shell supports color
+if [[ -t 1 ]] && command -v tput >/dev/null 2>&1; then
+    COLOR_SUPPORT=true
+    GREEN=$(tput setaf 2)
+    RED=$(tput setaf 1)
+    YELLOW=$(tput setaf 3)
+    NC=$(tput sgr0) # No Color
+else
+    COLOR_SUPPORT=false
+    GREEN=''
+    RED=''
+    YELLOW=''
+    NC=''
+fi
 
 # Save the parent directory of this script to a variable
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
