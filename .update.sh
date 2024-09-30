@@ -51,7 +51,12 @@ done
 # Fetch the latest changes from the remote if not forcing update
 if [ "$FORCE_UPDATE" = false ]; then
   echo "${YELLOW}[+] Fetching latest changes${NC}"
-  git fetch
+  if git fetch; then
+    echo "${GREEN}[+] Fetch successful${NC}"
+  else
+    echo "${RED}[!] Fetch failed${NC}"
+    exit 1
+  fi
 
   # Check if there are any changes
   if [[ $(git rev-parse HEAD) == $(git rev-parse '@{u}') ]]; then
@@ -61,7 +66,12 @@ if [ "$FORCE_UPDATE" = false ]; then
 
   # Pull the latest changes, overwriting any local changes
   echo "${YELLOW}[+] Pulling latest changes${NC}"
-  git pull -X theirs
+  if git pull -X theirs; then
+    echo "${GREEN}[+] Pull successful${NC}"
+  else
+    echo "${RED}[!] Pull failed${NC}"
+    exit 1
+  fi
 fi
 
 set -a # automatically export all variables
@@ -84,7 +94,11 @@ for f in */; do
         else
             echo -e "${RED}[+] Update failed in $f${NC}"
         fi
-        git restore .on-update.sh
+        if git restore .on-update.sh; then
+            echo "${GREEN}[+] Successfully restored .on-update.sh${NC}"
+        else
+            echo "${RED}[!] Failed to restore .on-update.sh${NC}"
+        fi
     )
     fi
 done

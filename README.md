@@ -9,7 +9,7 @@
 Add the cronjob to your crontab file:
 
 ```cronexp
-* * * * * /path_to_this_repo/.update.sh > /path_to_this_repo/.update.log
+* * * * * /path_to_this_repo/.update.sh > /path_to_this_repo/.update.log 2>&1
 ```
 
 ## Usage
