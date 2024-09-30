@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Ensure appdata dirs are created
 sudo mkdir -p /mnt/appdata/fusion
 

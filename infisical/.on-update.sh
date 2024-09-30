@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # If .env is missing, create it
 if [ ! -f .env ]; then
     echo "ENCRYPTION_KEY=$(openssl rand -hex 16)" > .env

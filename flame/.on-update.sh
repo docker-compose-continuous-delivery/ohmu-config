@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the "flomepage" appdata folders exists
 sudo mkdir -p /mnt/appdata/flame
 

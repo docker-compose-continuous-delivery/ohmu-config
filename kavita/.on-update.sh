@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo mkdir -p /mnt/appdata/kavita
 
 # Ensure the books docker volume exists

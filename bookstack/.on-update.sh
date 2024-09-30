@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the "bookstack" appdata folders exists
 sudo mkdir -p /mnt/appdata/bookstack/app
 sudo mkdir -p /mnt/appdata/bookstack/db
