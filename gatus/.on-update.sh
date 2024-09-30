@@ -6,7 +6,7 @@ sudo mkdir -p /mnt/appdata/gatus
 # Update secrets
 ../.scripts/update_secrets.sh 13bd2f48-dcac-4f12-82c5-0857af82cfa1 .env
 
-export $(grep -v '^#' .env | xargs)
+export "$(grep -v '^#' .env | xargs)"
 envsubst < config.tpl.yaml > config.yaml
 
 CHANGED=$(../.scripts/detect-changes.sh config.tpl.yaml)

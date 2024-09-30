@@ -11,7 +11,7 @@ CHANGED=false
 
 # Loop through all provided file arguments
 for FILE in "$@"; do
-    if git diff --name-only HEAD@{1} HEAD | grep -q "$FILE"; then
+    if git diff --name-only "HEAD@{1}" HEAD | grep -q "$FILE"; then
         CHANGED=true
         break
     fi
