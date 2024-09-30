@@ -2,13 +2,11 @@
 
 # Detect if the shell supports color
 if [[ -t 1 ]] && command -v tput >/dev/null 2>&1; then
-    COLOR_SUPPORT=true
     GREEN=$(tput setaf 2)
     RED=$(tput setaf 1)
     YELLOW=$(tput setaf 3)
     NC=$(tput sgr0) # No Color
 else
-    COLOR_SUPPORT=false
     GREEN=''
     RED=''
     YELLOW=''
