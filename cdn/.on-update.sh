@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the "bookstack" appdata folders exists
 sudo mkdir -p /mnt/data/cdn
 

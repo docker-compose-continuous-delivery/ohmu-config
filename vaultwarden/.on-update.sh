@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Ensure vaultwarden appdata folder is created
 sudo mkdir -p /mnt/appdata/vaultwarden
 

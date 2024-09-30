@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the "traefik" network exists
 docker network create traefik 2> /dev/null
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo mkdir -p /mnt/appdata/readarr
 sudo chown -R 1000:1000 /mnt/appdata/readarr
 

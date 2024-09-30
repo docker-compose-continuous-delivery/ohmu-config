@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the required folders exists
 sudo mkdir -p /mnt/appdata/viseron
 sudo mkdir -p /mnt/data/viseron

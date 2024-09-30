@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo mkdir -p /mnt/appdata/cf
 
 # List of files to monitor for changes

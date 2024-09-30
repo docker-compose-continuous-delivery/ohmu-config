@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the appdata folders exists
 sudo mkdir -p /mnt/appdata/gatus
 
