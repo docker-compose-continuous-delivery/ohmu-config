@@ -14,10 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify that all .on-update.sh files are executable
+      - name: Verify that all .sh files are executable
         run: |
           exit_code=0
-          for file in $(find . -name '.on-update.sh'); do
+          for file in $(find . -name '*.sh'); do
             echo "Validating $file"
             if [ ! -x "$file" ]; then
               echo "Error: $file is not executable"
