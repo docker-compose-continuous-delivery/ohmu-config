@@ -9,17 +9,7 @@ sudo mkdir -p /mnt/appdata/gatus
 export $(grep -v '^#' .env | xargs)
 envsubst < config.tpl.yaml > config.yaml
 
-# List of files to monitor for changes
-FILES_TO_MONITOR=("config.tpl.yaml")
-
-# Check if any of the specified files have changed
-CHANGED=false
-for FILE in "${FILES_TO_MONITOR[@]}"; do
-    if git diff --name-only HEAD@{1} HEAD | grep -q "$FILE"; then
-        CHANGED=true
-        break
-    fi
-done
+CHANGED=$(../.scripts/detect-changes.sh config.tpl.yaml)
 
 if [ "$CHANGED" = true ]; then
     echo "One of the monitored files has changed, recreating service"
