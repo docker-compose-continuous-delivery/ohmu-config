@@ -36,17 +36,28 @@ trap 'rm -f "$LOCK_FILE"; exit $?' INT TERM EXIT
 
 # Parse command-line arguments
 FORCE_UPDATE=false
-while getopts "f" opt; do
+INSTALL_CRON=false
+while getopts "fi" opt; do
   case ${opt} in
     f )
       FORCE_UPDATE=true
       ;;
+    i )
+      INSTALL_CRON=true
+      ;;
     \? )
-      echo "Usage: cmd [-f]"
+      echo "Usage: cmd [-f] [-i]"
       exit 1
       ;;
   esac
 done
+
+# Install crontab if requested
+if [ "$INSTALL_CRON" = true ]; then
+    (crontab -l 2>/dev/null; echo "* * * * * $SCRIPT_DIR/.update.sh > $SCRIPT_DIR/.update.log 2>&1") | crontab -
+    echo "${GREEN}[+] Crontab installed successfully${NC}"
+    exit 0
+fi
 
 # Fetch the latest changes from the remote if not forcing update
 if [ "$FORCE_UPDATE" = false ]; then
