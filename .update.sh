@@ -43,7 +43,10 @@ if [ "$FORCE_UPDATE" = false ]; then
 fi
 
 set -a # automatically export all variables
+
+# shellcheck disable=SC1091
 source .env
+
 set +a
 
 # Run the on-update.sh script
