@@ -1,0 +1,17 @@
+services:
+  factorio:
+    image: factoriotools/factorio
+    container_name: factorio
+    restart: unless-stopped
+    ports:
+      - "34197:34197/udp"
+    volumes:
+      - factorio-data:/factorio
+
+volumes:
+  factorio-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/opt/factorio"
+      o: bind
