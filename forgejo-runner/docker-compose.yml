@@ -21,4 +21,4 @@ services:
       DOCKER_HOST: tcp://docker-in-docker:2375
     user: 1001:1001
     volumes:
-      - ./data:/data
+      - /mnt/appdata/forgejo-runner:/data
