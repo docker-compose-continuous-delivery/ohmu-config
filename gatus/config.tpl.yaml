@@ -178,54 +178,54 @@ endpoints:
         description: "Hello, your Sentry instance is down!"
         send-on-resolved: true
 
-  # ======================= Axel Services =======================
-  - name: grafana
-    group: axel
-    url: "https://grafana.ax.oze.li/"
-    interval: 1m
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    alerts:
-      - type: discord
-        description: "Hello <@373187960881020931>, your Grafana instance is down!"
-        send-on-resolved: true
+  # # ======================= Axel Services =======================
+  # - name: grafana
+  #   group: axel
+  #   url: "https://grafana.ax.oze.li/"
+  #   interval: 1m
+  #   conditions:
+  #     - "[STATUS] == 200"
+  #     - "[CERTIFICATE_EXPIRATION] > 48h"
+  #   alerts:
+  #     - type: discord
+  #       description: "Hello <@373187960881020931>, your Grafana instance is down!"
+  #       send-on-resolved: true
 
-  - name: homepage
-    group: axel
-    url: "https://homepage.ax.oze.li/"
-    interval: 1m
-    conditions:
-      - "[STATUS] == 401"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    alerts:
-      - type: discord
-        description: "Hello <@373187960881020931>, your homepage is down!"
-        send-on-resolved: true
+  # - name: homepage
+  #   group: axel
+  #   url: "https://homepage.ax.oze.li/"
+  #   interval: 1m
+  #   conditions:
+  #     - "[STATUS] == 401"
+  #     - "[CERTIFICATE_EXPIRATION] > 48h"
+  #   alerts:
+  #     - type: discord
+  #       description: "Hello <@373187960881020931>, your homepage is down!"
+  #       send-on-resolved: true
 
-  - name: sonarqube
-    group: axel
-    url: "https://sonarqube.ax.oze.li/"
-    interval: 1m
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    alerts:
-      - type: discord
-        description: "Hello <@373187960881020931>, your SonarQube instance is down!"
-        send-on-resolved: true
+  # - name: sonarqube
+  #   group: axel
+  #   url: "https://sonarqube.ax.oze.li/"
+  #   interval: 1m
+  #   conditions:
+  #     - "[STATUS] == 200"
+  #     - "[CERTIFICATE_EXPIRATION] > 48h"
+  #   alerts:
+  #     - type: discord
+  #       description: "Hello <@373187960881020931>, your SonarQube instance is down!"
+  #       send-on-resolved: true
 
-  - name: traefik
-    group: axel
-    url: "https://traefik.ax.oze.li/"
-    interval: 1m
-    conditions:
-      - "[STATUS] == 401"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    alerts:
-      - type: discord
-        description: "Hello <@373187960881020931>, your Traefik instance is down!"
-        send-on-resolved: true
+  # - name: traefik
+  #   group: axel
+  #   url: "https://traefik.ax.oze.li/"
+  #   interval: 1m
+  #   conditions:
+  #     - "[STATUS] == 401"
+  #     - "[CERTIFICATE_EXPIRATION] > 48h"
+  #   alerts:
+  #     - type: discord
+  #       description: "Hello <@373187960881020931>, your Traefik instance is down!"
+  #       send-on-resolved: true
 
   # ======================= Edgar Services =======================
   - name: horus
