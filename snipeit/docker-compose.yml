@@ -1,0 +1,59 @@
+# Compose file for production.
+
+services:
+  snipeit:
+    image: snipe/snipe-it:${APP_VERSION:-v7.0.11}
+    restart: unless-stopped
+    volumes:
+      - snipeit-appdata:/var/lib/snipeit
+    depends_on:
+      snipeit-db:
+        condition: service_healthy
+        restart: true
+    env_file:
+      - .env
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.snipeit.rule=Host(`snipeit.ozeliurs.com`)"
+      - "traefik.http.routers.snipeit.entrypoints=websecure"
+      - "traefik.http.routers.snipeit.tls=true"
+      - "traefik.http.routers.snipeit.tls.certresolver=letsencrypt"
+      - "traefik.http.services.snipeit.loadbalancer.server.port=80"
+
+  snipeit-db:
+    image: mariadb:11.5.2
+    restart: unless-stopped
+    volumes:
+      - snipeit-db-appdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 1s
+      retries: 5
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  snipeit-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/snipeit/app"
+      o: bind
+  snipeit-db-appdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/snipeit/db"
+      o: bind
