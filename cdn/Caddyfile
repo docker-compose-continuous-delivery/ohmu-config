@@ -6,7 +6,7 @@
         path /private/*
     }
 
-    basicauth @privateFolder {
-        admin:$2y$05$fzav5O8FcY7imP9FAjxgb./NUjrpUd3/tuYBm6.tHwfpKj5kqVsIG
+    basic_auth @privateFolder {
+        admin $2y$05$fzav5O8FcY7imP9FAjxgb./NUjrpUd3/tuYBm6.tHwfpKj5kqVsIG
     }
 }
