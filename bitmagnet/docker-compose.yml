@@ -1,0 +1,68 @@
+services:
+  bitmagnet:
+    image: ghcr.io/bitmagnet-io/bitmagnet:latest
+    container_name: bitmagnet
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+    environment:
+      - POSTGRES_HOST=bitmagnet_db
+      - POSTGRES_PASSWORD=fPy5aLff2O48PaFsM5wzojZVHgC9sq00sCqP4Gpbdje1TX7WamX18iVd4wwwztd7
+    command:
+      - worker
+      - run
+      - --keys=http_server
+      - --keys=queue_server
+      - --keys=dht_crawler
+    depends_on:
+      bitmagnet_db:
+        condition: service_healthy
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bitmagnet.rule=Host(`bitmagnet.ozeliurs.com`)"
+      - "traefik.http.routers.bitmagnet.entrypoints=websecure"
+      - "traefik.http.routers.bitmagnet.tls=true"
+      - "traefik.http.routers.bitmagnet.tls.certresolver=letsencrypt"
+      - "traefik.http.services.bitmagnet.loadbalancer.server.port=3333"
+
+  bitmagnet_db:
+    image: postgres:16-alpine
+    container_name: bitmagnet_db
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+    environment:
+      - POSTGRES_PASSWORD=fPy5aLff2O48PaFsM5wzojZVHgC9sq00sCqP4Gpbdje1TX7WamX18iVd4wwwztd7
+      - POSTGRES_DB=bitmagnet
+      - PGUSER=postgres
+    volumes:
+      - bitmagnet-dbdata:/var/lib/postgresql/data
+    shm_size: 1g
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      start_period: 20s
+      interval: 10s
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  bitmagnet-dbdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/bitmagnet/postgres"
+      o: bind
