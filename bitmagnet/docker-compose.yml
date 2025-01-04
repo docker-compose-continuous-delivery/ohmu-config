@@ -29,6 +29,8 @@ services:
       - "traefik.http.routers.bitmagnet.tls=true"
       - "traefik.http.routers.bitmagnet.tls.certresolver=letsencrypt"
       - "traefik.http.services.bitmagnet.loadbalancer.server.port=3333"
+      - "traefik.http.middlewares.bitmagnet-auth.basicauth.users=ozeliurs:$$apr1$$rx7HJadB$$vhWamXCocRzUAx4TEif/d0"
+      - "traefik.http.routers.bitmagnet.middlewares=bitmagnet-auth"
 
   bitmagnet_db:
     image: postgres:16-alpine
