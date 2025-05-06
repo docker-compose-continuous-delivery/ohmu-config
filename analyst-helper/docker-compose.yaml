@@ -1,8 +1,9 @@
 version: "3.8"
 
 services:
-  frontend:
+  analyst-frontend:
     image: ghcr.io/ozeliurs/analyst-helper-frontend:main
+    container_name: analyst-frontend
     environment:
       - API_URL=https://api.analyst.ozeliurs.com
     depends_on:
@@ -16,8 +17,9 @@ services:
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
-  backend:
+  analyst-backend:
     image: ghcr.io/ozeliurs/analyst-helper-backend:main
+    container_name: analyst-backend
     environment:
       - ABUSEIPDB_API_KEYS=${ABUSEIPDB_API_KEYS}
       - VIRUSTOTAL_API_KEYS=${VIRUSTOTAL_API_KEYS}
