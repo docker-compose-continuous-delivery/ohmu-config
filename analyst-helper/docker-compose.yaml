@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: ghcr.io/ozeliurs/analyst-helper-frontend:main
+    environment:
+      - API_URL=https://api.analyst.ozeliurs.com
+    depends_on:
+      - backend
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`analyst.ozeliurs.com`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+
+  backend:
+    image: ghcr.io/ozeliurs/analyst-helper-backend:main
+    environment:
+      - ABUSEIPDB_API_KEYS=${ABUSEIPDB_API_KEYS}
+      - VIRUSTOTAL_API_KEYS=${VIRUSTOTAL_API_KEYS}
+    volumes:
+      - ./backend:/app
+      - cache:/app/cache
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.analyst.ozeliurs.com`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+
+volumes:
+  cache:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/mnt/appdata/analyst-helper"
+      o: bind
+
+networks:
+  traefik:
+    external: true
