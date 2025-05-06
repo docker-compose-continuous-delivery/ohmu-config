@@ -7,7 +7,7 @@ services:
     environment:
       - API_URL=https://api.analyst.ozeliurs.com
     depends_on:
-      - backend
+      - analyst-backend
     networks:
       - traefik
     labels:
@@ -24,7 +24,6 @@ services:
       - ABUSEIPDB_API_KEYS=${ABUSEIPDB_API_KEYS}
       - VIRUSTOTAL_API_KEYS=${VIRUSTOTAL_API_KEYS}
     volumes:
-      - ./backend:/app
       - cache:/app/cache
     networks:
       - traefik
